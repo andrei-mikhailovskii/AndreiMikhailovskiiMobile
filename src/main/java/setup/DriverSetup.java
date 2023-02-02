@@ -15,7 +15,7 @@ public class DriverSetup {
     @BeforeTest
     public void driverSetup() throws MalformedURLException {
 
-        File app = new File("C:\\Java\\EPAMTestApp.apk");
+        File app = new File("src/main/resources/EPAMTestApp.apk");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
