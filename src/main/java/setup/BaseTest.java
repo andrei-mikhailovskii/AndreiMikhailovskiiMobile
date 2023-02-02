@@ -1,3 +1,4 @@
+/*
 package setup;
 
 import io.appium.java_client.AppiumDriver;
@@ -65,3 +66,4 @@ public class BaseTest implements IDriver {
 
 
 }
+*/

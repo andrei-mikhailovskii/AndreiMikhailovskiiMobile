@@ -1,3 +1,4 @@
+/*
 package pageObjects;
 
 import io.appium.java_client.AppiumDriver;
@@ -35,3 +36,4 @@ public class PageObject implements IPageObject {
 
     }
 }
+*/
