@@ -1,13 +1,11 @@
 package scenarios;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import setup.DriverSetup;
+import setup.DriverSetupNativeApp;
 
-public class BaseTest extends DriverSetup {
+public class NativeTest extends DriverSetupNativeApp {
 
     //user info
     String email = "email@testemail.com";
@@ -28,7 +26,7 @@ public class BaseTest extends DriverSetup {
     String registerNewUserButton = "platkovsky.alexey.epamtestapp:id/register_new_account_button";
     String budgetActivity = "//android.widget.TextView[@text='BudgetActivity']";
 
-    @Test
+    @Test(description = "This test checks if Budget Activity page is opened")
     public void registerTest() throws InterruptedException {
         androidDriver.findElement(By.id(registerButton)).click();
         Thread.sleep(1000);
