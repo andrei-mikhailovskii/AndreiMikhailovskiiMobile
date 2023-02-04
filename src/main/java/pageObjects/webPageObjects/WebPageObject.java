@@ -1,5 +1,4 @@
-/*
-package pageObjects;
+package pageObjects.webPageObjects;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -13,4 +12,3 @@ public class WebPageObject  {
 
 
 }
-*/
