@@ -39,7 +39,7 @@ public class NativeTest extends DriverSetupNativeApp {
         androidDriver.findElement(By.id(emailField)).sendKeys(email);
         androidDriver.findElement(By.id(passwordField)).sendKeys(password);
         androidDriver.findElement(By.id(signInBtn)).click();
-        Assert.assertEquals(true, androidDriver.findElement(By.xpath(budgetActivity)).isDisplayed());
+        Assert.assertEquals(androidDriver.findElement(By.xpath(budgetActivity)).isDisplayed(), true);
         System.out.println("Finish!");
     }
 

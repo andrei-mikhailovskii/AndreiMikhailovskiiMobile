@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class DriverSetupWebApp {
 
@@ -22,6 +23,7 @@ public class DriverSetupWebApp {
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
 
         this.androidDriver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        androidDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
