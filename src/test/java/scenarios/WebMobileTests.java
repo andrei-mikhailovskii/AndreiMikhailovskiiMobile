@@ -2,8 +2,8 @@ package scenarios;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.webPageObjects.GoogleSearchResultsPageObject;
-import pageObjects.webPageObjects.GoogleStartPageObject;
+import pageobjects.webpageobjects.GoogleSearchResultsPageObject;
+import pageobjects.webpageobjects.GoogleStartPageObject;
 import setup.BaseTest;
 
 public class WebMobileTests extends BaseTest {
@@ -34,7 +34,8 @@ public class WebMobileTests extends BaseTest {
         );
 
         // Check IANA homepage title
-        assert ((WebDriver) getDriver()).getTitle().equals("Internet Assigned Numbers Authority") : "This is not IANA homepage";
+        assert ((WebDriver) getDriver())
+        .getTitle().equals("Internet Assigned Numbers Authority") : "This is not IANA homepage";
 
         // Log that test finished
         System.out.println("Site opening done");

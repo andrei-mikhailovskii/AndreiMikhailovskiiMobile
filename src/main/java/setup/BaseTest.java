@@ -1,17 +1,16 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import pageObjects.PageObject;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import pageobjects.PageObject;
 
 public class BaseTest extends PropertiesExtractor implements IDriver {
 
@@ -30,9 +29,11 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
     IPageObject po;
 
     @Override
-    public AppiumDriver getDriver() { return appiumDriver; }
+    public AppiumDriver getDriver() {
+        return appiumDriver;
+    }
 
-    @Parameters({"platformName","appType","deviceName","browserName","app"})
+    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
     @BeforeSuite(alwaysRun = true)
     public void setUp(String platformName, String appType, String deviceName,
                       @Optional("") String browserName, @Optional("") String app) throws Exception {
@@ -61,10 +62,12 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
         capabilities.setCapability(PLATFORM_NAME, platformName);
         capabilities.setCapability(DEVICE_NAME, deviceName);
 
-        if(app.endsWith(".apk")) capabilities.setCapability(APP, (new File(app)).getAbsolutePath());
+        if (app.endsWith(".apk")) {
+            capabilities.setCapability(APP, (new File(app)).getAbsolutePath());
+        }
 
         capabilities.setCapability(BROWSER_NAME, browserName);
-        capabilities.setCapability(CHROME_DISABLE_BUILD_CHECK,chromeDisableBuildCheckBool);
+        capabilities.setCapability(CHROME_DISABLE_BUILD_CHECK, chromeDisableBuildCheckBool);
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
@@ -85,6 +88,5 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
         }
 
     }
-
 
 }

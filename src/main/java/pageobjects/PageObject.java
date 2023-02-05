@@ -1,10 +1,10 @@
-package pageObjects;
+package pageobjects;
 
 import io.appium.java_client.AppiumDriver;
 import java.lang.reflect.Field;
 import org.openqa.selenium.WebElement;
-import pageObjects.nativePageObjects.StartPageObject;
-import pageObjects.webPageObjects.GoogleStartPageObject;
+import pageobjects.nativepageobjects.StartPageObject;
+import pageobjects.webpageobjects.GoogleStartPageObject;
 import setup.IPageObject;
 
 public class PageObject implements IPageObject {
@@ -15,7 +15,7 @@ public class PageObject implements IPageObject {
 
         System.out.println("Current app type: " + appType);
 
-        switch(appType) {
+        switch (appType) {
             case "web":
                 somePageObject = new GoogleStartPageObject(appiumDriver);
                 break;

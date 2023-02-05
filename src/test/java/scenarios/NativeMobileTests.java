@@ -4,20 +4,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.nativePageObjects.BudgetActivityPageObject;
-import pageObjects.nativePageObjects.RegisterPageObject;
-import pageObjects.nativePageObjects.StartPageObject;
+import pageobjects.nativepageobjects.BudgetActivityPageObject;
+import pageobjects.nativepageobjects.RegisterPageObject;
+import pageobjects.nativepageobjects.StartPageObject;
 import setup.BaseTest;
 import setup.PropertiesExtractor;
 
 public class NativeMobileTests extends BaseTest {
-
-    /*@Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
-    public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        getPo().getWelement("signInBtn").click();
-        System.out.println("Simplest Android native test done");
-
-    }*/
 
     @Test(groups = {"native"}, description = "This test checks if Budget Activity page is opened")
     public void registerTest() {
@@ -50,4 +43,12 @@ public class NativeMobileTests extends BaseTest {
         }
 
     }
+
+    /*@Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
+    public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+        getPo().getWelement("signInBtn").click();
+        System.out.println("Simplest Android native test done");
+
+    }*/
+
 }

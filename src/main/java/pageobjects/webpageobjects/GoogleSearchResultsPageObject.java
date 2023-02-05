@@ -1,4 +1,4 @@
-package pageObjects.webPageObjects;
+package pageobjects.webpageobjects;
 
 import io.appium.java_client.AppiumDriver;
 import java.util.List;
