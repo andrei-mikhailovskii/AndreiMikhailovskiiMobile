@@ -1,12 +1,11 @@
 package pageObjects;
 
 import io.appium.java_client.AppiumDriver;
+import java.lang.reflect.Field;
 import org.openqa.selenium.WebElement;
 import pageObjects.nativePageObjects.StartPageObject;
-import pageObjects.webPageObjects.WebPageObject;
+import pageObjects.webPageObjects.GoogleStartPageObject;
 import setup.IPageObject;
-
-import java.lang.reflect.Field;
 
 public class PageObject implements IPageObject {
 
@@ -18,7 +17,7 @@ public class PageObject implements IPageObject {
 
         switch(appType) {
             case "web":
-                somePageObject = new WebPageObject(appiumDriver);
+                somePageObject = new GoogleStartPageObject(appiumDriver);
                 break;
             case "native":
                 somePageObject = new StartPageObject(appiumDriver);
@@ -30,11 +29,15 @@ public class PageObject implements IPageObject {
 
 
     @Override
-    public WebElement getWelement(String weName) throws NoSuchFieldException, IllegalAccessException {
+    public WebElement getWelement(String weName) {
         // use reflection technique
-        Field field = somePageObject.getClass().getDeclaredField(weName);
-        field.setAccessible(true);
-        return (WebElement) field.get(somePageObject);
-
+        try {
+            Field field = somePageObject.getClass().getDeclaredField(weName);
+            field.setAccessible(true);
+            return (WebElement) field.get(somePageObject);
+        } catch (NoSuchFieldException | IllegalAccessException exception) {
+            System.err.println(exception);
+        }
+        return null;
     }
 }

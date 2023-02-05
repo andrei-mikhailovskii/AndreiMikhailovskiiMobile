@@ -16,14 +16,21 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest extends PropertiesExtractor implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
+
+    //capability names
+    private static final String PLATFORM_NAME = "platformName";
+    private static final String DEVICE_NAME = "deviceName";
+    private static final String APP = "app";
+    private static final String BROWSER_NAME = "browserName";
+    private static final String CHROME_DISABLE_BUILD_CHECK = "chromedriverDisableBuildCheck";
+
+    //capability values
+    private String chromeDisableBuildCheckBool = "true";
+
     IPageObject po;
 
     @Override
     public AppiumDriver getDriver() { return appiumDriver; }
-
-    public IPageObject getPo() {
-        return po;
-    }
 
     @Parameters({"platformName","appType","deviceName","browserName","app"})
     @BeforeSuite(alwaysRun = true)
@@ -36,21 +43,28 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
     }
 
     @AfterSuite(alwaysRun = true)
-    public void tearDown() throws NullPointerException {
-        System.out.println("After");
-        appiumDriver.closeApp();
+    public void tearDown() {
+        try {
+            System.out.println("After");
+            appiumDriver.closeApp();
+        } catch (NullPointerException nullPointerException) {
+            System.err.println("Appium driver is null: " + nullPointerException);
+        }
+
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
         //mandatory Android capabilities
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "emulator-5554");
+        capabilities.setCapability(PLATFORM_NAME, platformName);
+        capabilities.setCapability(DEVICE_NAME, deviceName);
 
-        if(app.endsWith(".apk")) capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        if(app.endsWith(".apk")) capabilities.setCapability(APP, (new File(app)).getAbsolutePath());
 
-        capabilities.setCapability("browserName", browserName);
-        capabilities.setCapability("chromedriverDisableBuildCheck","true");
+        capabilities.setCapability(BROWSER_NAME, browserName);
+        capabilities.setCapability(CHROME_DISABLE_BUILD_CHECK,chromeDisableBuildCheckBool);
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
@@ -63,8 +77,13 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
 
     }
 
-    private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
-        po = new PageObject(appType, appiumDriver);
+    private void setPageObject(String appType, AppiumDriver appiumDriver) {
+        try {
+            po = new PageObject(appType, appiumDriver);
+        } catch (Exception exception) {
+            System.err.println(exception);
+        }
+
     }
 
 

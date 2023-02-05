@@ -1,15 +1,30 @@
-/*
 package scenarios;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.webPageObjects.GoogleSearchResultsPageObject;
+import pageObjects.webPageObjects.GoogleStartPageObject;
 import setup.BaseTest;
 
 public class WebMobileTests extends BaseTest {
 
-    @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
+    private static final String URL = "https://www.google.com/";
+    private String searchQuery = "EPAM";
+    private int minExpectedValidSearchResults = 1;
+
+    @Test(groups = {"web"}, description = "Make sure that relevant values are displayed on Google search page")
+    public void googleSearchTest() throws InterruptedException {
+        getDriver().get(URL);
+
+        GoogleStartPageObject googleStartPage = new GoogleStartPageObject(getDriver());
+        googleStartPage.runSearchQuery(searchQuery);
+
+        GoogleSearchResultsPageObject searchResultsPage = new GoogleSearchResultsPageObject(getDriver());
+        int actualSearchResult = searchResultsPage.findValidSearchResult();
+        Assert.assertEquals(actualSearchResult, minExpectedValidSearchResults);
+    }
+
+    /*@Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
     public void simpleWebTest() throws InterruptedException {
         getDriver().get("http://iana.org"); // open IANA homepage
 
@@ -23,7 +38,6 @@ public class WebMobileTests extends BaseTest {
 
         // Log that test finished
         System.out.println("Site opening done");
-    }
+    }*/
 
 }
-*/
