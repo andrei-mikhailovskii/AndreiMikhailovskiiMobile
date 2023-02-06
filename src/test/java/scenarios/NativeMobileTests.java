@@ -7,17 +7,17 @@ import pageobjects.nativepageobjects.BudgetActivityPageObject;
 import pageobjects.nativepageobjects.RegisterPageObject;
 import pageobjects.nativepageobjects.StartPageObject;
 import setup.BaseTest;
-import setup.PropertiesExtractor;
 
 public class NativeMobileTests extends BaseTest {
+
+    private String email = System.getenv("email");
+    private String userName = System.getenv("userName");
+    private String password = System.getenv("password");
 
     @Test(groups = {"native"}, description = "This test checks if Budget Activity page is opened")
     public void registerTest() {
 
         try {
-            //get properties for the test (email, username, password)
-            PropertiesExtractor.getProperties();
-
             //click Register New Account button
             StartPageObject startPageObject = new StartPageObject(getDriver());
             startPageObject.clickRegisterButton();

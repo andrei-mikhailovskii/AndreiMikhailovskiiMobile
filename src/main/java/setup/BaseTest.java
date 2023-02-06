@@ -13,7 +13,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pageobjects.PageObject;
 
-public class BaseTest extends PropertiesExtractor implements IDriver {
+public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
     IPageObject po;
@@ -32,6 +32,10 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
     @Override
     public AppiumDriver getDriver() {
         return appiumDriver;
+    }
+
+    public IPageObject getPo() {
+        return po;
     }
 
     @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
@@ -92,7 +96,7 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
 
     protected WebDriverWait waitDriver() {
         if (webDriverWait == null) {
-            webDriverWait = new WebDriverWait(getDriver(), 5);
+            webDriverWait = new WebDriverWait(getDriver(), 10);
         }
         return webDriverWait;
     }
