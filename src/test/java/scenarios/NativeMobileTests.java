@@ -1,7 +1,6 @@
 package scenarios;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobjects.nativepageobjects.BudgetActivityPageObject;
@@ -16,28 +15,31 @@ public class NativeMobileTests extends BaseTest {
     public void registerTest() {
 
         try {
+            //get properties for the test (email, username, password)
             PropertiesExtractor.getProperties();
 
+            //click Register New Account button
             StartPageObject startPageObject = new StartPageObject(getDriver());
             startPageObject.clickRegisterButton();
 
+            //Fill the registration form
             RegisterPageObject registerPageObject = new RegisterPageObject(getDriver());
-            new WebDriverWait(getDriver(), 5)
-                    .until(ExpectedConditions.visibilityOf(RegisterPageObject.registrationHeader));
+            waitDriver().until(ExpectedConditions.visibilityOf(RegisterPageObject.registrationHeader));
             registerPageObject.fillEmail(email);
             registerPageObject.fillUsername(userName);
             registerPageObject.fillPassword(password);
             registerPageObject.fillPasswordConfirm(password);
             registerPageObject.clickRegisterButton();
 
-            new WebDriverWait(getDriver(), 5)
-                    .until(ExpectedConditions.visibilityOf(StartPageObject.startPageHeader));
+            //Log in with the same credential that were used for registration
+            waitDriver().until(ExpectedConditions.visibilityOf(StartPageObject.startPageHeader));
             startPageObject.fillEmail(email);
             startPageObject.fillPassword(password);
             startPageObject.clickSignInButton();
 
-            BudgetActivityPageObject budgetActivityPageObject = new BudgetActivityPageObject(getDriver());
-            Assert.assertEquals(BudgetActivityPageObject.budgetActivity.isDisplayed(), true);
+            //Verify that Budget Activity page is displayed
+            new BudgetActivityPageObject(getDriver());
+            Assert.assertTrue(BudgetActivityPageObject.budgetActivity.isDisplayed());
         } catch (NullPointerException nullPointerException) {
             System.err.println(nullPointerException);
         }

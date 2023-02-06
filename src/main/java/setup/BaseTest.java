@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
@@ -15,6 +16,8 @@ import pageobjects.PageObject;
 public class BaseTest extends PropertiesExtractor implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
+    IPageObject po;
+    WebDriverWait webDriverWait;
 
     //capability names
     private static final String PLATFORM_NAME = "platformName";
@@ -25,8 +28,6 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
 
     //capability values
     private String chromeDisableBuildCheckBool = "true";
-
-    IPageObject po;
 
     @Override
     public AppiumDriver getDriver() {
@@ -87,6 +88,13 @@ public class BaseTest extends PropertiesExtractor implements IDriver {
             System.err.println(exception);
         }
 
+    }
+
+    protected WebDriverWait waitDriver() {
+        if (webDriverWait == null) {
+            webDriverWait = new WebDriverWait(getDriver(), 5);
+        }
+        return webDriverWait;
     }
 
 }

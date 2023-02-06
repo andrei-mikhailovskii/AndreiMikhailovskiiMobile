@@ -13,15 +13,20 @@ public class WebMobileTests extends BaseTest {
     private int minExpectedValidSearchResults = 1;
 
     @Test(groups = {"web"}, description = "Make sure that relevant values are displayed on Google search page")
-    public void googleSearchTest() throws InterruptedException {
+    public void googleSearchTest() {
+
+        //open Google page
         getDriver().get(URL);
 
+        //run search query
         GoogleStartPageObject googleStartPage = new GoogleStartPageObject(getDriver());
         googleStartPage.runSearchQuery(searchQuery);
 
+        //Verify that at least one relevant search result is displayed
         GoogleSearchResultsPageObject searchResultsPage = new GoogleSearchResultsPageObject(getDriver());
         int actualSearchResult = searchResultsPage.findValidSearchResult();
         Assert.assertEquals(actualSearchResult, minExpectedValidSearchResults);
+
     }
 
     /*@Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")

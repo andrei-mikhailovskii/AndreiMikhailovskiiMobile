@@ -6,7 +6,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import setup.BaseTest;
 
 public class GoogleStartPageObject extends BaseTest {
@@ -21,9 +20,8 @@ public class GoogleStartPageObject extends BaseTest {
 
     public void runSearchQuery(String text) {
         searchString.sendKeys(text, Keys.ENTER);
-        new WebDriverWait(getDriver(), 5)
-                .until(webDriver -> ((JavascriptExecutor) webDriver)
-                                .executeScript("return document.readyState").equals("complete"));
+        waitDriver().until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
     }
 
 
