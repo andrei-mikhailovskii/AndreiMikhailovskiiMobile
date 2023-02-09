@@ -1,7 +1,10 @@
-After running Appium Server GUI and connecting the emulator:
+Before running tests, set the following environment variables:
+EPAM_NAME_SURNAME (name and surname in your EPAM account in the following format: "name_surname")
+MOBITRU_TOKEN (your Mobitry token)
 
+To run the test for the Android Web app, run the following Maven command: mvn clean test -P androidweb
+To run the test for the iOS Web app, run the following Maven command: mvn clean test -P iosweb
 To run the test for the Native app, run the following Maven command: mvn clean test -P native
-To run the test for the Web app, run the following Maven command: mvn clean test
 
 For the Native app, before the test run, set the following environmental values:
 "email"

@@ -48,7 +48,7 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+                        <ts.appium>https://${env.EPAM_NAME_SURNAME}:${env.MOBITRU_TOKEN}@app.mobitru.com/wd/hub</ts.appium>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -89,22 +89,32 @@
 
     <profiles>
         <profile>
+            <id>androidweb</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudAndroidWeb.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>iosweb</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudiOSWeb.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
             <id>native</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>src/test/resources/nativeTNG.xml</suite.file>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>web</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <suite.file>./src/test/resources/webTNG.xml</suite.file>
             </properties>
         </profile>
     </profiles>
