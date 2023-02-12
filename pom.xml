@@ -11,10 +11,11 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <selenium-java.version>3.141.59</selenium-java.version>
         <java-client.version>7.3.0</java-client.version>
         <testng.version>7.6.1</testng.version>
-        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
     </properties>
@@ -90,31 +91,22 @@
     <profiles>
         <profile>
             <id>androidweb</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
             <properties>
-                <suite.file>./src/test/resources/cloudAndroidWeb.xml</suite.file>
+                <suite.file>./src/test/resources/cloudAndroidWebTNG.xml</suite.file>
             </properties>
         </profile>
 
         <profile>
             <id>iosweb</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
             <properties>
-                <suite.file>./src/test/resources/cloudiOSWeb.xml</suite.file>
+                <suite.file>./src/test/resources/cloudiOSWebTNG.xml</suite.file>
             </properties>
         </profile>
 
         <profile>
-            <id>native</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+            <id>weblocal</id>
             <properties>
-                <suite.file>src/test/resources/nativeTNG.xml</suite.file>
+                <suite.file>./src/test/resources/webTNG.xml</suite.file>
             </properties>
         </profile>
     </profiles>

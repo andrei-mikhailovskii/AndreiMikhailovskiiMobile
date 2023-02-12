@@ -6,10 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pageobjects.PageObject;
@@ -31,7 +32,7 @@ public class BaseTest implements IDriver {
     private static final String APP_ACTIVITY = "appActivity";
     private static final String BUNDLE_ID = "bundleId";
     private static final String URL = String.format("https://%s:%s@app.mobitru.com/wd/hub",
-            System.getProperty("EPAM_NAME_SURNAME"), URLEncoder.encode(System.getProperty("MOBITRU_TOKEN")));
+            System.getenv("EPAM_NAME_SURNAME"), URLEncoder.encode(System.getenv("MOBITRU_TOKEN")));
 
     //capability values
     private String chromeDisableBuildCheckBool = "true";
@@ -45,8 +46,9 @@ public class BaseTest implements IDriver {
         return po;
     }
 
-    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName","app","appPackage","appActivity","bundleId"})
-    @BeforeSuite(alwaysRun = true)
+    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName",
+                    "app", "appPackage", "appActivity", "bundleId"})
+    @BeforeClass(alwaysRun = true)
     public void setUp(String platformName,
                       String appType,
                       @Optional("") String deviceName,
@@ -63,7 +65,7 @@ public class BaseTest implements IDriver {
 
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         try {
             System.out.println("After");
@@ -100,6 +102,7 @@ public class BaseTest implements IDriver {
 
         try {
             appiumDriver = new AppiumDriver(new URL(URL), capabilities);
+            //"http://127.0.0.1:4723/wd/hub"
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -123,6 +126,11 @@ public class BaseTest implements IDriver {
             webDriverWait = new WebDriverWait(getDriver(), 10);
         }
         return webDriverWait;
+    }
+
+    protected void waitUntilPageIsLoaded() {
+        waitDriver().until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
     }
 
 }
