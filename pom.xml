@@ -90,23 +90,30 @@
 
     <profiles>
         <profile>
-            <id>androidweb</id>
+            <id>androidWeb</id>
             <properties>
                 <suite.file>./src/test/resources/cloudAndroidWebTNG.xml</suite.file>
             </properties>
         </profile>
 
         <profile>
-            <id>iosweb</id>
+            <id>iosWeb</id>
             <properties>
                 <suite.file>./src/test/resources/cloudiOSWebTNG.xml</suite.file>
             </properties>
         </profile>
 
         <profile>
-            <id>weblocal</id>
+            <id>androidNative</id>
             <properties>
-                <suite.file>./src/test/resources/webTNG.xml</suite.file>
+                <suite.file>./src/test/resources/cloudAndroidNativeTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>iosNative</id>
+            <properties>
+                <suite.file>./src/test/resources/cloudiOSNativeTNG.xml</suite.file>
             </properties>
         </profile>
     </profiles>

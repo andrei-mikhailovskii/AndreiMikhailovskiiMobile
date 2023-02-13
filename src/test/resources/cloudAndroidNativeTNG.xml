@@ -1,13 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Web mobile testing Suite">
-    <parameter name="appType" value="web"/>
+<suite name="Native Android cloud mobile testing Suite">
+    <parameter name="appType" value="native"/>
     <parameter name="udid" value="07VACS00000G7Q"/>
     <parameter name="platformName" value="Android"/>
-    <parameter name="browserName" value="Chrome"/>
-    <test name="Web tests cloud Android">
+    <parameter name="appPackage" value="platkovsky.alexey.epamtestapp"/>
+    <parameter name="appActivity" value="activities.LoginActivity"/>
+    <test name="Native Android tests">
         <groups>
             <run>
-                <include name="web"/>
+                <include name="native"/>
             </run>
         </groups>
         <packages>

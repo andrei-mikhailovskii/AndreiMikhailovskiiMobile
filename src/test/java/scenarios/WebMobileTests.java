@@ -21,7 +21,7 @@ public class WebMobileTests extends BaseTest {
 
         //accept cookies
         GoogleStartPageObject googleStartPage = new GoogleStartPageObject(getDriver());
-        //googleStartPage.acceptCookies();
+        googleStartPage.acceptCookies();
 
         //run search query
         googleStartPage.runSearchQuery(searchQuery);

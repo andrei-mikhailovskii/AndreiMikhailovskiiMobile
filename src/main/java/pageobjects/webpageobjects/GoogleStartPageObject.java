@@ -18,6 +18,8 @@ public class GoogleStartPageObject extends BaseTest {
     WebElement searchString;
     @FindBy(xpath = xpathAcceptCookiesButton)
     WebElement acceptAllButton;
+    @FindBy(xpath = "//button[@id='KByQx']")
+    List<WebElement> readMoreCookiesButton;
 
     public GoogleStartPageObject(AppiumDriver appiumDriver) {
 
@@ -37,20 +39,9 @@ public class GoogleStartPageObject extends BaseTest {
 
         } else if (platformName.equals("iOS")) {
 
-            try {
-                Thread.sleep(2000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
             searchString.sendKeys(text);
-            getDriver().findElement(By.xpath("//*[@class='gLFyf']")).click();
+            //getDriver().findElement(By.xpath("//*[@class='gLFyf']")).click();
 
-            try {
-                Thread.sleep(2000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             waitUntilPageIsLoaded();
 
         }
@@ -59,11 +50,13 @@ public class GoogleStartPageObject extends BaseTest {
 
     public void acceptCookies() {
 
-        JavascriptExecutor executor = getDriver();
-        executor.executeScript("arguments[0].scrollIntoView()",
-                getDriver().findElement(By.xpath(xpathAcceptCookiesButton)));
-        waitDriver().until(ExpectedConditions.elementToBeClickable(acceptAllButton));
-        acceptAllButton.click();
+        if (!readMoreCookiesButton.isEmpty()) {
+            JavascriptExecutor executor = getDriver();
+            executor.executeScript("arguments[0].scrollIntoView()",
+                    getDriver().findElement(By.xpath(xpathAcceptCookiesButton)));
+            waitDriver().until(ExpectedConditions.elementToBeClickable(acceptAllButton));
+            acceptAllButton.click();
+        }
 
     }
 
