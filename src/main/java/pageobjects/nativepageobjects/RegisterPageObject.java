@@ -60,6 +60,7 @@ public class RegisterPageObject extends BaseTest {
 
         registerNewUserButton.click();
 
+        // possible bug in the iOS app - it is needed to tap 'Register new account' button twice
         if (platformName.equals("iOS")) {
             registerNewUserButton.click();
         }
