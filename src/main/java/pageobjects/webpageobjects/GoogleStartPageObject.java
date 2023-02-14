@@ -35,16 +35,16 @@ public class GoogleStartPageObject extends BaseTest {
         if (platformName.equals("Android")) {
 
             searchString.sendKeys(text, Keys.ENTER);
-            waitUntilPageIsLoaded();
 
         } else if (platformName.equals("iOS")) {
 
+            //this actually does not work on Mobitru website (still looking for workaround)
             searchString.sendKeys(text);
-            //getDriver().findElement(By.xpath("//*[@class='gLFyf']")).click();
-
-            waitUntilPageIsLoaded();
+            searchString.sendKeys(Keys.RETURN);
 
         }
+
+        waitUntilPageIsLoaded();
 
     }
 

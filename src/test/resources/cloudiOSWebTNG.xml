@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Web mobile testing Suite">
     <parameter name="appType" value="web"/>
-    <parameter name="udid" value="00008101-000650A90EA0001E"/>
+    <parameter name="udid" value="00008101-000611D60C04001E"/>
     <parameter name="platformName" value="iOS"/>
     <parameter name="browserName" value="Safari"/>
     <test name="Web tests cloud iOS">

@@ -2,6 +2,8 @@ package pageobjects;
 
 import io.appium.java_client.AppiumDriver;
 import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.WebElement;
 import pageobjects.nativepageobjects.StartPageObject;
 import pageobjects.webpageobjects.GoogleStartPageObject;
@@ -10,10 +12,9 @@ import setup.IPageObject;
 public class PageObject implements IPageObject {
 
     Object somePageObject; // it should be set of web page or EPAM Test App WebElements
+    private static final Logger LOGGER = Logger.getLogger(PageObject.class.getName());
 
     public PageObject(String appType, AppiumDriver appiumDriver) throws Exception {
-
-        System.out.println("Current app type: " + appType);
 
         switch (appType) {
             case "web":
@@ -36,7 +37,7 @@ public class PageObject implements IPageObject {
             field.setAccessible(true);
             return (WebElement) field.get(somePageObject);
         } catch (NoSuchFieldException | IllegalAccessException exception) {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, "Exception", exception);
         }
         return null;
     }

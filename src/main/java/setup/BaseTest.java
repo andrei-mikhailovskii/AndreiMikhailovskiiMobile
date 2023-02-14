@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +20,7 @@ import pageobjects.PageObject;
 public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
+    protected static final Logger LOGGER = Logger.getGlobal();
     IPageObject po;
     WebDriverWait webDriverWait;
 
@@ -59,7 +62,7 @@ public class BaseTest implements IDriver {
                       @Optional("") String appActivity,
                       @Optional("") String bundleId
     ) throws Exception {
-        System.out.println("Before: app type - " + appType);
+
         setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
 
@@ -71,7 +74,7 @@ public class BaseTest implements IDriver {
             System.out.println("After");
             appiumDriver.closeApp();
         } catch (NullPointerException nullPointerException) {
-            System.err.println("Appium driver is null: " + nullPointerException);
+            LOGGER.log(Level.WARNING, "Appium driver is null", nullPointerException);
         }
 
     }
@@ -102,7 +105,6 @@ public class BaseTest implements IDriver {
 
         try {
             appiumDriver = new AppiumDriver(new URL(URL), capabilities);
-            //"http://127.0.0.1:4723/wd/hub"
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -116,7 +118,7 @@ public class BaseTest implements IDriver {
         try {
             po = new PageObject(appType, appiumDriver);
         } catch (Exception exception) {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, "New page object was not set", exception);
         }
 
     }

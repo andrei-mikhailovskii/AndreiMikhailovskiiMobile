@@ -1,5 +1,6 @@
 package scenarios;
 
+import java.util.logging.Level;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -41,7 +42,7 @@ public class NativeMobileTests extends BaseTest {
             new BudgetActivityPageObject(getDriver());
             Assert.assertTrue(BudgetActivityPageObject.budgetActivity.isDisplayed());
         } catch (NullPointerException nullPointerException) {
-            System.err.println(nullPointerException);
+            LOGGER.log(Level.WARNING, "NullPointerException in NativeMobileTests", nullPointerException);
         }
 
     }
