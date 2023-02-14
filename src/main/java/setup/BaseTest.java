@@ -5,6 +5,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
@@ -16,6 +18,7 @@ import pageobjects.PageObject;
 public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
+    protected static final Logger LOGGER = Logger.getGlobal();
     IPageObject po;
     WebDriverWait webDriverWait;
 
@@ -42,7 +45,6 @@ public class BaseTest implements IDriver {
     @BeforeSuite(alwaysRun = true)
     public void setUp(String platformName, String appType, String deviceName,
                       @Optional("") String browserName, @Optional("") String app) throws Exception {
-        System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
         setPageObject(appType, appiumDriver);
 
@@ -54,7 +56,7 @@ public class BaseTest implements IDriver {
             System.out.println("After");
             appiumDriver.closeApp();
         } catch (NullPointerException nullPointerException) {
-            System.err.println("Appium driver is null: " + nullPointerException);
+            LOGGER.log(Level.WARNING, "Appium driver is null", nullPointerException);
         }
 
     }
@@ -89,7 +91,7 @@ public class BaseTest implements IDriver {
         try {
             po = new PageObject(appType, appiumDriver);
         } catch (Exception exception) {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, "New page object was not set", exception);
         }
 
     }
