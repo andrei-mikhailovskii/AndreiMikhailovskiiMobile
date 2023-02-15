@@ -17,9 +17,13 @@ public class WebMobileTests extends BaseTest {
 
         //open Google page
         getDriver().get(URL);
+        waitUntilPageIsLoaded();
+
+        //accept cookies
+        GoogleStartPageObject googleStartPage = new GoogleStartPageObject(getDriver());
+        googleStartPage.acceptCookies();
 
         //run search query
-        GoogleStartPageObject googleStartPage = new GoogleStartPageObject(getDriver());
         googleStartPage.runSearchQuery(searchQuery);
 
         //Verify that at least one relevant search result is displayed
